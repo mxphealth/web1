@@ -1,0 +1,118 @@
+<footer class="mxp-footer">
+  <div class="mxp-footer-inner">
+    <div class="mxp-footer-brand">
+      <strong>MaxproHealth</strong>
+      <p>Health information, wellness guides, products, and K-Beauty resources.</p>
+    </div>
+
+    <nav class="mxp-footer-nav" aria-label="Footer navigation">
+      <a href="index.html">Home</a>
+      <a href="health.html">Health</a>
+      <a href="products.html">Products</a>
+      <a href="k-beauty.html">K-Beauty</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="mxp-footer-legal">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms.html">Terms</a>
+      <a href="medical-disclaimer.html">Medical Disclaimer</a>
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+  </div>
+
+  <div class="mxp-footer-bottom">
+    <p>© <span id="mxpYear"></span> MaxproHealth. All rights reserved.</p>
+  </div>
+
+  <style>
+    .mxp-footer {
+      margin-top: 60px;
+      background: #101815;
+      color: #d9e2de;
+      padding: 50px 20px 20px;
+    }
+
+    .mxp-footer-inner {
+      width: min(1200px, 100%);
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    .mxp-footer-brand strong {
+      font-size: 1.3rem;
+      color: #fff;
+    }
+
+    .mxp-footer-brand p {
+      max-width: 360px;
+      margin: 12px 0 0;
+      color: #9eaaa5;
+      line-height: 1.6;
+      font-size: .9rem;
+    }
+
+    .mxp-footer-nav,
+    .mxp-footer-legal {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .mxp-footer a {
+      color: #b9c5c0;
+      text-decoration: none;
+      font-size: .9rem;
+      transition: color .2s ease;
+    }
+
+    .mxp-footer a:hover {
+      color: #42c58b;
+    }
+
+    .mxp-footer-bottom {
+      width: min(1200px, 100%);
+      margin: 40px auto 0;
+      padding-top: 18px;
+      border-top: 1px solid #29332f;
+    }
+
+    .mxp-footer-bottom p {
+      margin: 0;
+      color: #89958f;
+      font-size: .82rem;
+    }
+
+    @media (max-width: 750px) {
+      .mxp-footer-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+
+      .mxp-footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .mxp-footer {
+        padding: 40px 18px 18px;
+      }
+
+      .mxp-footer-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .mxp-footer-brand {
+        grid-column: auto;
+      }
+    }
+  </style>
+
+  <script>
+    document.getElementById("mxpYear").textContent =
+      new Date().getFullYear();
+  </script>
+</footer>
