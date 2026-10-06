@@ -453,6 +453,7 @@ window.maxprohealthProducts = {
 };
 
 
+
 /* =========================================================
    RENDERER
    Controls how the categories and products are displayed.
@@ -464,7 +465,7 @@ window.maxprohealthProducts = {
   "use strict";
 
   var MOUNT_ID = "productContent";
-  var EMPTY_BUTTON_LABEL = "Coming Soon"; // shown when affiliate_url is empty
+  var EMPTY_BUTTON_LABEL = "Coming Soon";
 
   // Published Google Sheet (tab "products") as CSV
   var SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQd5A8sZ0ttf4fB--kQLbqJMK8ZJGIH4aPFpMoKY56Kqq8nZImezdkQppmHPlQT69jLDB8iFl6c5Tt3/pub?gid=0&single=true&output=csv";
@@ -472,36 +473,235 @@ window.maxprohealthProducts = {
   /* ---------- Styles (injected by this file) ---------- */
 
   var css = `
-    .pt{width:min(1200px,calc(100% - 32px));margin:0 auto;padding:10px 0 0}
-    .pt-head{text-align:center;max-width:760px;margin:0 auto 20px}
-    .pt-head h2{margin:0 0 10px;font-size:clamp(1.5rem,4vw,2.1rem);line-height:1.2;letter-spacing:-0.03em}
-    .pt-head p{margin:0;color:var(--muted,#64736c)}
-    .pt-cat{margin-bottom:26px}
-    .pt-cat h3{margin:0 0 16px;text-align:center;font-size:1.3rem;letter-spacing:-0.02em}
-    .pt-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
-    .pt-card{display:flex;flex-direction:column;gap:10px;padding:20px;background:var(--surface,#f3f7f5);border:1px solid var(--border,#dfe9e4);border-radius:16px}
-    .pt-card h4{margin:0;font-size:1.05rem}
-    .pt-card p{margin:0;font-size:.92rem;color:var(--muted,#64736c)}
-    .pt-btn{display:block;margin-top:auto;padding:10px 14px;text-align:center;text-decoration:none;font-size:.9rem;font-weight:700;color:#fff;background:var(--accent,#16845b);border-radius:10px}
-    .pt-btn:hover{background:var(--accent-dark,#0d6846)}
-    .pt-btn.off{background:var(--border,#dfe9e4);color:var(--muted,#64736c);cursor:not-allowed}
-    .pt-error{text-align:center;color:var(--muted,#64736c)}
+    .pt{
+      width:min(1200px,calc(100% - 32px));
+      margin:0 auto;
+      padding:10px 0 0;
+    }
+
+    .pt-head{
+      text-align:center;
+      max-width:760px;
+      margin:0 auto 22px;
+    }
+
+    .pt-head h2{
+      margin:0 0 10px;
+      font-size:clamp(1.5rem,4vw,2.1rem);
+      line-height:1.2;
+      letter-spacing:-0.03em;
+    }
+
+    .pt-head p{
+      margin:0;
+      color:var(--muted,#64736c);
+    }
+
+    .pt-nav{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:8px;
+      margin:0 auto 30px;
+      padding:0;
+    }
+
+    .pt-nav a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:38px;
+      padding:8px 14px;
+      border:1px solid var(--border,#dfe9e4);
+      border-radius:999px;
+      background:var(--surface,#f3f7f5);
+      color:var(--text,#26352f);
+      text-decoration:none;
+      font-size:.88rem;
+      font-weight:600;
+      line-height:1.2;
+      transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
+    }
+
+    .pt-nav a:hover{
+      background:var(--accent,#16845b);
+      border-color:var(--accent,#16845b);
+      color:#fff;
+      transform:translateY(-1px);
+    }
+
+    .pt-categories{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:24px;
+      align-items:start;
+    }
+
+    .pt-cat{
+      margin:0;
+      padding:22px;
+      background:var(--surface,#f3f7f5);
+      border:1px solid var(--border,#dfe9e4);
+      border-radius:18px;
+      scroll-margin-top:100px;
+    }
+
+    .pt-cat h3{
+      margin:0 0 18px;
+      padding-bottom:12px;
+      text-align:center;
+      font-size:1.18rem;
+      line-height:1.3;
+      letter-spacing:-0.02em;
+      border-bottom:1px solid var(--border,#dfe9e4);
+    }
+
+    .pt-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .pt-card{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-width:0;
+      padding:16px;
+      background:var(--background,#fff);
+      border:1px solid var(--border,#dfe9e4);
+      border-radius:14px;
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+    }
+
+    .pt-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 22px rgba(0,0,0,.07);
+      border-color:var(--accent,#16845b);
+    }
+
+    .pt-card h4{
+      margin:0;
+      font-size:1rem;
+      line-height:1.35;
+    }
+
+    .pt-card p{
+      margin:0;
+      font-size:.9rem;
+      line-height:1.55;
+      color:var(--muted,#64736c);
+    }
+
+    .pt-btn{
+      display:block;
+      width:100%;
+      margin-top:auto;
+      padding:10px 14px;
+      text-align:center;
+      text-decoration:none;
+      font-size:.88rem;
+      font-weight:700;
+      color:#fff;
+      background:var(--accent,#16845b);
+      border-radius:10px;
+      transition:
+        background .2s ease,
+        transform .2s ease;
+    }
+
+    .pt-btn:hover{
+      background:var(--accent-dark,#0d6846);
+      transform:translateY(-1px);
+    }
+
+    .pt-btn.off{
+      background:var(--border,#dfe9e4);
+      color:var(--muted,#64736c);
+      cursor:not-allowed;
+    }
+
+    .pt-error{
+      text-align:center;
+      color:var(--muted,#64736c);
+    }
+
+    @media (max-width:900px){
+      .pt-categories{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:600px){
+      .pt{
+        width:min(100% - 20px,1200px);
+      }
+
+      .pt-nav{
+        justify-content:flex-start;
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        padding:2px 2px 8px;
+        scrollbar-width:thin;
+      }
+
+      .pt-nav a{
+        flex:0 0 auto;
+        white-space:nowrap;
+      }
+
+      .pt-cat{
+        padding:18px;
+      }
+
+      .pt-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      .pt-nav a,
+      .pt-card,
+      .pt-btn{
+        transition:none;
+      }
+
+      html{
+        scroll-behavior:auto;
+      }
+    }
   `;
 
   /* ---------- Helpers ---------- */
 
   function esc(v) {
     return String(v == null ? "" : v).replace(/[&<>"']/g, function (c) {
-      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[c];
     });
   }
 
   // Returns a valid http(s) URL, or "" (empty/invalid becomes a disabled button)
   function safeUrl(url) {
     if (!url || !String(url).trim()) return "";
+
     try {
       var u = new URL(url, window.location.href);
-      return (u.protocol === "https:" || u.protocol === "http:") ? u.href : "";
+      return (u.protocol === "https:" || u.protocol === "http:")
+        ? u.href
+        : "";
     } catch (e) {
       return "";
     }
@@ -512,55 +712,86 @@ window.maxprohealthProducts = {
   // Reads CSV text into an array of objects keyed by the header row
   function parseCSV(text) {
     var rows = [], row = [], field = "", quoted = false, i, ch;
+
     text = String(text || "").replace(/^\uFEFF/, "");
 
     for (i = 0; i < text.length; i++) {
       ch = text[i];
+
       if (quoted) {
         if (ch === '"') {
-          if (text[i + 1] === '"') { field += '"'; i++; }
-          else quoted = false;
+          if (text[i + 1] === '"') {
+            field += '"';
+            i++;
+          } else {
+            quoted = false;
+          }
         } else {
           field += ch;
         }
       } else if (ch === '"') {
         quoted = true;
       } else if (ch === ",") {
-        row.push(field); field = "";
+        row.push(field);
+        field = "";
       } else if (ch === "\n" || ch === "\r") {
         if (ch === "\r" && text[i + 1] === "\n") i++;
-        row.push(field); field = ""; rows.push(row); row = [];
+
+        row.push(field);
+        field = "";
+        rows.push(row);
+        row = [];
       } else {
         field += ch;
       }
     }
-    if (field !== "" || row.length) { row.push(field); rows.push(row); }
+
+    if (field !== "" || row.length) {
+      row.push(field);
+      rows.push(row);
+    }
 
     rows = rows.filter(function (r) {
-      return r.some(function (x) { return String(x).trim() !== ""; });
+      return r.some(function (x) {
+        return String(x).trim() !== "";
+      });
     });
+
     if (!rows.length) return [];
 
-    var head = rows[0].map(function (h) { return String(h).trim().toLowerCase(); });
+    var head = rows[0].map(function (h) {
+      return String(h).trim().toLowerCase();
+    });
+
     return rows.slice(1).map(function (r) {
       var o = {};
-      head.forEach(function (h, k) { o[h] = r[k] == null ? "" : String(r[k]).trim(); });
+
+      head.forEach(function (h, k) {
+        o[h] = r[k] == null ? "" : String(r[k]).trim();
+      });
+
       return o;
     });
   }
 
   function norm(s) {
-    return String(s || "").toLowerCase().replace(/\s+/g, " ").trim();
+    return String(s || "")
+      .toLowerCase()
+      .replace(/\s+/g, " ")
+      .trim();
   }
 
   // Makes a clean address part from a product name:
   // "The Encyclopedia of Power Foods (E-book)" -> "the-encyclopedia-of-power-foods-e-book"
   // (go.html uses the same rule to find the product again)
   function slugify(s) {
-    return String(s || "").toLowerCase()
+    return String(s || "")
+      .toLowerCase()
       .replace(/\u00df/g, "ss")
-      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
   }
 
   // Returns a copy of the data with the live sheet rows added.
@@ -580,11 +811,20 @@ window.maxprohealthProducts = {
       if (!r.name) return;
 
       var target = null;
+
       cats.forEach(function (c) {
-        if (norm(c.title) === norm(r.category)) target = c;
+        if (norm(c.title) === norm(r.category)) {
+          target = c;
+        }
       });
+
       if (!target) {
-        console.warn('products-data.js: category not found for "' + r.name + '": ' + r.category);
+        console.warn(
+          'products-data.js: category not found for "' +
+          r.name +
+          '": ' +
+          r.category
+        );
         return;
       }
 
@@ -592,39 +832,70 @@ window.maxprohealthProducts = {
       // go.html forwards the visitor to the real affiliate link.
       var realUrl = safeUrl(r.affiliate_link);
       var slug = slugify(r.name);
+
       var item = {
         id: "sheet-" + (i + 2),
         name: r.name,
         description: r.description || "",
         cta: "Click Here",
         affiliate_url: realUrl
-          ? (slug ? window.location.origin + "/products/" + slug : realUrl)
+          ? (slug
+              ? window.location.origin + "/products/" + slug
+              : realUrl)
           : "",
         fromSheet: true
       };
 
       var slot = -1, k, p;
+
       for (k = 0; k < target.products.length; k++) {
         p = target.products[k];
-        if (!p.fromSheet && !p.affiliate_url && !p.description) { slot = k; break; }
+
+        if (
+          !p.fromSheet &&
+          !p.affiliate_url &&
+          !p.description
+        ) {
+          slot = k;
+          break;
+        }
       }
-      if (slot >= 0) target.products[slot] = item;
-      else target.products.push(item);
+
+      if (slot >= 0) {
+        target.products[slot] = item;
+      } else {
+        target.products.push(item);
+      }
     });
 
-    return { title: d.title, description: d.description, categories: cats };
+    return {
+      title: d.title,
+      description: d.description,
+      categories: cats
+    };
   }
 
   function loadSheet(done) {
     if (!SHEET_CSV_URL || typeof fetch !== "function") return;
-    fetch(SHEET_CSV_URL, { cache: "no-store" })
+
+    fetch(SHEET_CSV_URL, {
+      cache: "no-store"
+    })
       .then(function (res) {
-        if (!res.ok) throw new Error("Sheet unavailable (" + res.status + ")");
+        if (!res.ok) {
+          throw new Error("Sheet unavailable (" + res.status + ")");
+        }
+
         return res.text();
       })
-      .then(function (text) { done(parseCSV(text)); })
+      .then(function (text) {
+        done(parseCSV(text));
+      })
       .catch(function (e) {
-        console.warn("products-data.js: sheet not loaded, showing built-in products.", e);
+        console.warn(
+          "products-data.js: sheet not loaded, showing built-in products.",
+          e
+        );
       });
   }
 
@@ -632,44 +903,140 @@ window.maxprohealthProducts = {
 
   function card(p) {
     var url = safeUrl(p.affiliate_url);
-    var btn = url
-      ? '<a class="pt-btn" href="' + esc(url) +
-        '" target="_blank" rel="sponsored nofollow noopener noreferrer">' +
-        esc(p.cta || "Click Here") + "</a>"
-      : '<span class="pt-btn off" aria-disabled="true">' +
-        esc(EMPTY_BUTTON_LABEL) + "</span>";
 
-    return '<article class="pt-card"><h4>' + esc(p.name) + "</h4>" +
-      (p.description ? "<p>" + esc(p.description) + "</p>" : "") +
-      btn + "</article>";
+    var btn = url
+      ? '<a class="pt-btn" href="' +
+        esc(url) +
+        '" target="_blank" rel="sponsored nofollow noopener noreferrer">' +
+        esc(p.cta || "Click Here") +
+        "</a>"
+      : '<span class="pt-btn off" aria-disabled="true">' +
+        esc(EMPTY_BUTTON_LABEL) +
+        "</span>";
+
+    return (
+      '<article class="pt-card">' +
+      "<h4>" +
+      esc(p.name) +
+      "</h4>" +
+      (p.description
+        ? "<p>" + esc(p.description) + "</p>"
+        : "") +
+      btn +
+      "</article>"
+    );
   }
 
   function category(c) {
-    var items = Array.isArray(c.products) ? c.products : [];
+    var items = Array.isArray(c.products)
+      ? c.products.filter(function (p) {
+          return (
+            p &&
+            (
+              p.fromSheet ||
+              p.affiliate_url ||
+              p.description ||
+              !/^Product\s+\d+$/i.test(String(p.name || "").trim())
+            )
+          );
+        })
+      : [];
+
     if (!items.length) return "";
-    return '<div class="pt-cat" id="' + esc(c.id) + '"><h3>' + esc(c.title) +
-      '</h3><div class="pt-grid">' + items.map(card).join("") + "</div></div>";
+
+    return (
+      '<div class="pt-cat" id="' +
+      esc(c.id) +
+      '">' +
+      "<h3>" +
+      esc(c.title) +
+      "</h3>" +
+      '<div class="pt-grid">' +
+      items.map(card).join("") +
+      "</div>" +
+      "</div>"
+    );
   }
 
   function draw(mount, d) {
+    var activeCategories = d.categories.filter(function (c) {
+      var items = Array.isArray(c.products)
+        ? c.products.filter(function (p) {
+            return (
+              p &&
+              (
+                p.fromSheet ||
+                p.affiliate_url ||
+                p.description ||
+                !/^Product\s+\d+$/i.test(
+                  String(p.name || "").trim()
+                )
+              )
+            );
+          })
+        : [];
+
+      return items.length > 0;
+    });
+
+    var nav = activeCategories
+      .map(function (c) {
+        return (
+          '<a href="#' +
+          esc(c.id) +
+          '">' +
+          esc(c.title) +
+          "</a>"
+        );
+      })
+      .join("");
+
+    var categories = activeCategories
+      .map(category)
+      .join("");
+
     mount.innerHTML =
-      '<section class="pt"><div class="pt-head"><h2>' + esc(d.title) + "</h2>" +
-      (d.description ? "<p>" + esc(d.description) + "</p>" : "") + "</div>" +
-      d.categories.map(category).join("") + "</section>";
+      '<section class="pt">' +
+      '<div class="pt-head">' +
+      "<h2>" +
+      esc(d.title) +
+      "</h2>" +
+      (d.description
+        ? "<p>" + esc(d.description) + "</p>"
+        : "") +
+      "</div>" +
+      (nav
+        ? '<nav class="pt-nav" aria-label="Product categories">' +
+          nav +
+          "</nav>"
+        : "") +
+      '<div class="pt-categories">' +
+      categories +
+      "</div>" +
+      "</section>";
   }
 
   /* ---------- Init ---------- */
 
   function init() {
     var mount = document.getElementById(MOUNT_ID);
+
     if (!mount) {
-      console.error('products-data.js: <div id="' + MOUNT_ID + '"> not found.');
+      console.error(
+        'products-data.js: <div id="' +
+        MOUNT_ID +
+        '"> not found.'
+      );
       return;
     }
 
     var d = window.maxprohealthProducts;
+
     if (!d || !Array.isArray(d.categories)) {
-      mount.innerHTML = '<section class="pt"><p class="pt-error">Products could not be loaded.</p></section>';
+      mount.innerHTML =
+        '<section class="pt">' +
+        '<p class="pt-error">Products could not be loaded.</p>' +
+        "</section>";
       return;
     }
 
@@ -682,6 +1049,7 @@ window.maxprohealthProducts = {
 
     // Show the built-in products first, then add the live sheet rows
     draw(mount, d);
+
     loadSheet(function (rows) {
       draw(mount, mergeSheet(d, rows));
     });
