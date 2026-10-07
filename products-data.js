@@ -454,6 +454,8 @@ window.maxprohealthProducts = {
 
 
 
+
+
 /* =========================================================
    RENDERER
    Controls how the categories and products are displayed.
@@ -553,7 +555,7 @@ window.maxprohealthProducts = {
     .pt-cat h3{
       margin:0 0 18px;
       padding-bottom:12px;
-      text-align:center;
+      text-align:left;
       font-size:1.18rem;
       line-height:1.3;
       letter-spacing:-0.02em;
