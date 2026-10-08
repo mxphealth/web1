@@ -499,29 +499,36 @@ window.maxprohealthProducts = {
       color:var(--muted,#64736c);
     }
 
+    /* ---- Category tabs: centered block, 4 per row ----
+       Flex (not grid) so an incomplete last row stays centered.
+       Only categories that hold valid items are rendered. */
     .pt-nav{
       display:flex;
       flex-wrap:wrap;
       justify-content:center;
-      gap:8px;
+      gap:10px;
+      max-width:900px;
       margin:0 auto 30px;
       padding:0;
     }
 
     .pt-nav a{
-      display:inline-flex;
+      box-sizing:border-box;
+      flex:0 0 calc((100% - 30px) / 4);
+      display:flex;
       align-items:center;
       justify-content:center;
-      min-height:38px;
-      padding:8px 14px;
+      min-height:46px;
+      padding:8px 12px;
       border:1px solid var(--border,#dfe9e4);
       border-radius:999px;
       background:var(--surface,#f3f7f5);
       color:var(--text,#26352f);
       text-decoration:none;
-      font-size:.88rem;
+      text-align:center;
+      font-size:.85rem;
       font-weight:600;
-      line-height:1.2;
+      line-height:1.25;
       transition:
         background .2s ease,
         border-color .2s ease,
@@ -635,28 +642,32 @@ window.maxprohealthProducts = {
       color:var(--muted,#64736c);
     }
 
+    /* Tablet: 3 tabs per row */
     @media (max-width:900px){
       .pt-categories{
         grid-template-columns:1fr;
       }
+
+      .pt-nav a{
+        flex:0 0 calc((100% - 20px) / 3);
+      }
     }
 
+    /* Mobile: 2 tabs per row */
     @media (max-width:600px){
       .pt{
         width:min(100% - 20px,1200px);
       }
 
       .pt-nav{
-        justify-content:flex-start;
-        flex-wrap:nowrap;
-        overflow-x:auto;
-        padding:2px 2px 8px;
-        scrollbar-width:thin;
+        gap:8px;
       }
 
       .pt-nav a{
-        flex:0 0 auto;
-        white-space:nowrap;
+        flex:0 0 calc((100% - 8px) / 2);
+        min-height:44px;
+        padding:8px 10px;
+        font-size:.82rem;
       }
 
       .pt-cat{
@@ -903,6 +914,26 @@ window.maxprohealthProducts = {
 
   /* ---------- Templates ---------- */
 
+  // A product is "valid" when it is a real listing, not an empty placeholder
+  function isValidProduct(p) {
+    return !!(
+      p &&
+      (
+        p.fromSheet ||
+        p.affiliate_url ||
+        p.description ||
+        !/^Product\s+\d+$/i.test(String(p.name || "").trim())
+      )
+    );
+  }
+
+  // Only the valid products of a category
+  function validItems(c) {
+    return Array.isArray(c.products)
+      ? c.products.filter(isValidProduct)
+      : [];
+  }
+
   function card(p) {
     var url = safeUrl(p.affiliate_url);
 
@@ -930,19 +961,7 @@ window.maxprohealthProducts = {
   }
 
   function category(c) {
-    var items = Array.isArray(c.products)
-      ? c.products.filter(function (p) {
-          return (
-            p &&
-            (
-              p.fromSheet ||
-              p.affiliate_url ||
-              p.description ||
-              !/^Product\s+\d+$/i.test(String(p.name || "").trim())
-            )
-          );
-        })
-      : [];
+    var items = validItems(c);
 
     if (!items.length) return "";
 
@@ -961,24 +980,9 @@ window.maxprohealthProducts = {
   }
 
   function draw(mount, d) {
+    // Categories without valid items are not shown (neither tab nor section)
     var activeCategories = d.categories.filter(function (c) {
-      var items = Array.isArray(c.products)
-        ? c.products.filter(function (p) {
-            return (
-              p &&
-              (
-                p.fromSheet ||
-                p.affiliate_url ||
-                p.description ||
-                !/^Product\s+\d+$/i.test(
-                  String(p.name || "").trim()
-                )
-              )
-            );
-          })
-        : [];
-
-      return items.length > 0;
+      return validItems(c).length > 0;
     });
 
     var nav = activeCategories
