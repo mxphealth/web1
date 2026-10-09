@@ -18,157 +18,168 @@
 <meta property="og:url" content="https://maxprohealth.pages.dev/privacy-policy">
 
 <style>
-:root {
-  --brand: #16845b;
-  --brand-dark: #0f6444;
-  --bg: #ffffff;
-  --bg-soft: #f3f8f5;
-  --text: #1d2b25;
-  --muted: #55655d;
-  --border: #d9e5df;
-  --link: #0f6444;
-}
-html.dark {
-  --brand: #2bb784;
-  --brand-dark: #2bb784;
-  --bg: #111815;
-  --bg-soft: #18221d;
-  --text: #e6efea;
-  --muted: #9fb2a8;
-  --border: #2a3a32;
-  --link: #5fd4a8;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans KR", Arial, sans-serif;
-  line-height: 1.7;
-  font-size: 17px;
-}
-a { color: var(--link); }
-a:focus-visible, button:focus-visible {
-  outline: 3px solid var(--brand);
-  outline-offset: 2px;
-}
+  :root {
+    --brand: #16845b;
+    --brand-dark: #0f6444;
+    --bg: #ffffff;
+    --bg-soft: #f3f8f5;
+    --text: #1d2b25;
+    --muted: #55655d;
+    --border: #d9e5df;
+    --link: #0f6444;
+  }
+  html.dark {
+    --brand: #2bb784;
+    --brand-dark: #2bb784;
+    --bg: #111815;
+    --bg-soft: #18221d;
+    --text: #e6efea;
+    --muted: #9fb2a8;
+    --border: #2a3a32;
+    --link: #5fd4a8;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans KR", Arial, sans-serif;
+    line-height: 1.7;
+    font-size: 17px;
+  }
+  a { color: var(--link); }
+  a:focus-visible, button:focus-visible {
+    outline: 3px solid var(--brand);
+    outline-offset: 2px;
+  }
 
-/* Privacy policy hero */
-.page-hero {
-  background: var(--bg-soft);
-  border-bottom: 1px solid var(--border);
-}
-.page-hero .wrap {
-  padding-top: 44px;
-  padding-bottom: 36px;
-}
-.page-hero h1 {
-  margin: 0 0 8px;
-  font-size: 2.1rem;
-  line-height: 1.25;
-}
-.page-hero p { margin: 0; color: var(--muted); }
+  /* Header */
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .header-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .brand-mark {
+    background: var(--brand);
+    color: #fff;
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-size: 0.9rem;
+  }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+  }
+  nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+  }
+  nav a:hover { border-bottom-color: var(--brand); }
 
-/* Page layout */
-.wrap {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-main .wrap {
-  padding-top: 32px;
-  padding-bottom: 64px;
-}
-.toc {
-  background: var(--bg-soft);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 18px 22px;
-  margin-bottom: 36px;
-}
-.toc h2 {
-  margin: 0 0 8px;
-  font-size: 1.05rem;
-}
-.toc ol {
-  margin: 0;
-  padding-left: 22px;
-  columns: 2;
-  column-gap: 32px;
-}
-.toc li { margin: 2px 0; break-inside: avoid; }
-section {
-  margin-bottom: 36px;
-  scroll-margin-top: 100px;
-}
-main h2 {
-  font-size: 1.4rem;
-  margin: 0 0 12px;
-  line-height: 1.3;
-}
-main h3 {
-  font-size: 1.1rem;
-  margin: 22px 0 6px;
-}
-p { margin: 0 0 14px; }
-ul.list { margin: 0 0 14px; padding-left: 22px; }
-ul.list li { margin: 4px 0; }
-.notice {
-  border-left: 4px solid var(--brand);
-  background: var(--bg-soft);
-  padding: 14px 18px;
-  border-radius: 0 8px 8px 0;
-  margin: 18px 0;
-}
-.notice p:last-child { margin-bottom: 0; }
-.table-scroll { overflow-x: auto; margin: 0 0 16px; }
-table {
-  border-collapse: collapse;
-  width: 100%;
-  min-width: 560px;
-  font-size: 0.95rem;
-}
-th, td {
-  border: 1px solid var(--border);
-  padding: 10px 12px;
-  text-align: left;
-  vertical-align: top;
-}
-th { background: var(--bg-soft); }
-.todo {
-  background: #fff3c4;
-  color: #5a4500;
-  padding: 0 4px;
-  border-radius: 3px;
-}
-html.dark .todo {
-  background: #4a3d00;
-  color: #ffe58a;
-}
+  /* Page hero */
+  .page-hero {
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--border);
+  }
+  .page-hero .wrap { padding-top: 44px; padding-bottom: 36px; }
+  .page-hero h1 { margin: 0 0 8px; font-size: 2.1rem; line-height: 1.25; }
+  .page-hero p { margin: 0; color: var(--muted); }
 
-/* Match the global header's fixed positioning */
-body { padding-top: 74px; }
-@media (max-width: 850px) {
-  body { padding-top: 68px; }
-}
-@media (max-width: 640px) {
-  body { font-size: 16px; }
-  .page-hero h1 { font-size: 1.7rem; }
-  .toc ol { columns: 1; }
-}
+  /* Layout */
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  main .wrap { padding-top: 32px; padding-bottom: 64px; }
+
+  .toc {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 36px;
+  }
+  .toc h2 { margin: 0 0 8px; font-size: 1.05rem; }
+  .toc ol { margin: 0; padding-left: 22px; columns: 2; column-gap: 32px; }
+  .toc li { margin: 2px 0; break-inside: avoid; }
+
+  section { margin-bottom: 36px; scroll-margin-top: 90px; }
+  h2 { font-size: 1.4rem; margin: 0 0 12px; line-height: 1.3; }
+  h3 { font-size: 1.1rem; margin: 22px 0 6px; }
+  p { margin: 0 0 14px; }
+  ul.list { margin: 0 0 14px; padding-left: 22px; }
+  ul.list li { margin: 4px 0; }
+
+  .notice {
+    border-left: 4px solid var(--brand);
+    background: var(--bg-soft);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 18px 0;
+  }
+  .notice p:last-child { margin-bottom: 0; }
+
+  .table-scroll { overflow-x: auto; margin: 0 0 16px; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 0.95rem; }
+  th, td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+  th { background: var(--bg-soft); }
+
+  .todo { background: #fff3c4; color: #5a4500; padding: 0 4px; border-radius: 3px; }
+  html.dark .todo { background: #4a3d00; color: #ffe58a; }
+
+  /* Footer */
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--bg-soft);
+    padding: 32px 20px;
+  }
+  .footer-inner { max-width: 1080px; margin: 0 auto; }
+  .footer-inner p { margin: 0 0 10px; color: var(--muted); font-size: 0.95rem; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 12px 0; }
+  .footer-links a { font-size: 0.95rem; }
+
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .page-hero h1 { font-size: 1.7rem; }
+    .toc ol { columns: 1; }
+  }
 </style>
 </head>
 
 <body>
 
-<!-- Global header: loaded from header.html -->
 <div id="mxp-header-placeholder"></div>
 
 <div class="page-hero">
   <div class="wrap">
     <h1>Privacy Policy</h1>
-    <p>Last updated: <span class="todo">[Month DD, YYYY]</span></p>
+    <p>Last updated: January 10, 2026</p>
   </div>
 </div>
 
@@ -178,7 +189,7 @@ body { padding-top: 74px; }
     <p>
       This Privacy Policy explains how <span class="todo">[Company / Owner Legal Name]</span>
       ("MaxproHealth", "we", "us", or "our") collects, uses, shares, and protects personal
-      information when you visit <strong>maxprohealth.pages.dev</strong> (the "Site") or contact us
+      information when you visit <strong>MaxproHealth</strong> (the "Site") or contact us
       through it. By using the Site, you acknowledge the practices described here.
     </p>
 
@@ -204,6 +215,7 @@ body { padding-top: 74px; }
 
     <section id="collect">
       <h2>1. Information we collect</h2>
+
       <h3>Information you give us</h3>
       <p>When you use our contact form, we collect:</p>
       <ul class="list">
@@ -215,6 +227,7 @@ body { padding-top: 74px; }
         If you contact us as a business, such as a distributor, supplier, hospital, or clinic, you may
         also give us your company name, role, country, and website.
       </p>
+
       <h3>Information collected automatically</h3>
       <p>When you visit the Site, we and our service providers may automatically collect:</p>
       <ul class="list">
@@ -294,7 +307,7 @@ body { padding-top: 74px; }
             <tr>
               <td>Affiliate tracking</td>
               <td>Record that a purchase came from our link so that we can be credited</td>
-              <td>Digistore24, ClickBank, and similar affiliate networks</td>
+              <td>Affiliate networks</td>
             </tr>
             <tr>
               <td>Advertising</td>
@@ -318,17 +331,10 @@ body { padding-top: 74px; }
     <section id="affiliate">
       <h2>5. Affiliate links and partners</h2>
       <p>
-        Some links on the Site lead to products and services offered through affiliate networks such
-        as <strong>Digistore24</strong> and <strong>ClickBank</strong>. When you click one of these
-        links, the network and the seller may place cookies on your device and collect information
-        about your visit and any purchase. This lets them credit us with a commission, at no extra cost
-        to you.
-      </p>
-      <p>
-        Those companies act as independent controllers of the data they collect, under their own
-        privacy policies. We do not receive your payment details. Please review the policy of the
-        network or seller before you buy. See also our
-        <a href="affiliate-disclosure.html">Affiliate Disclosure</a>.
+        Some links on the Site lead to products and services offered through affiliate networks.
+        When you click one of these links, the affiliate network or seller may place cookies on your
+        device and collect information about your visit and any purchase. This allows the referral to
+        be tracked and may enable us to receive a commission, at no extra cost to you.
       </p>
     </section>
 
@@ -380,7 +386,7 @@ body { padding-top: 74px; }
       <p>
         These rights come from laws such as the EU/UK GDPR, the California Consumer Privacy Act
         (CCPA/CPRA), and Korea's Personal Information Protection Act (PIPA). To exercise any of them,
-        email us at <a href="mailto:privacy@example.com"><span class="todo">[privacy@yourdomain.com]</span></a>.
+        use our <a href="contact.html">Contact Us page</a> to submit a privacy request.
         We may need to verify your identity before acting on a request, and we will not treat you
         unfairly for exercising your rights.
       </p>
@@ -424,122 +430,83 @@ body { padding-top: 74px; }
 
     <section id="contact">
       <h2>14. Contact us</h2>
-      <p>For privacy questions or requests:</p>
-      <ul class="list">
-        <li>Email: <a href="mailto:privacy@example.com"><span class="todo">[privacy@yourdomain.com]</span></a></li>
-        <li>Contact form: <a href="contact.html">maxprohealth.pages.dev/contact</a></li>
-        <li>Business address: <span class="todo">[Registered address and country]</span></li>
-      </ul>
+      <p>
+        For privacy questions or requests, please use our
+        <a href="contact.html">Contact Us page</a>.
+      </p>
+      <p>Business address: <span class="todo">[Registered address and country]</span></p>
     </section>
 
   </div>
 </main>
 
-<!-- Global footer: loaded from footer.html -->
 <div id="mxp-footer-placeholder"></div>
-
 <script>
 (function () {
   "use strict";
 
-  async function loadSharedComponent(url, placeholderId, selector) {
+  async function loadSharedComponent(url, placeholderId, componentSelector) {
     const placeholder = document.getElementById(placeholderId);
     if (!placeholder) return;
 
     try {
       const response = await fetch(url, { credentials: "same-origin" });
-
-      if (!response.ok) {
-        throw new Error("HTTP " + response.status + " loading " + url);
-      }
+      if (!response.ok) throw new Error("HTTP " + response.status);
 
       const source = await response.text();
       const parsed = new DOMParser().parseFromString(source, "text/html");
 
-      // Copy component styles into this page.
+      // Bring component styles into the page head so they apply to injected markup.
       parsed.querySelectorAll("style").forEach(function (style) {
         document.head.appendChild(style.cloneNode(true));
       });
 
-      // Extract the inline scripts before inserting component markup.
-      const component = selector
-        ? parsed.querySelector(selector)
-        : parsed.body;
-
-      if (!component) {
-        throw new Error("Component markup not found in " + url);
+      let component;
+      if (componentSelector) {
+        component = parsed.querySelector(componentSelector);
+      } else {
+        component = parsed.body;
       }
 
+      if (!component) throw new Error("Component markup was not found in " + url);
+
+      // Insert markup without inline script tags; scripts are activated separately below.
       const scripts = Array.from(component.querySelectorAll("script"));
-      scripts.forEach(function (script) {
-        script.remove();
-      });
+      scripts.forEach(function (script) { script.remove(); });
 
-      if (selector) {
-        // Insert the footer element only.
-        component.querySelectorAll("style").forEach(function (style) {
-          style.remove();
-        });
-
-        placeholder.replaceWith(component.cloneNode(true));
-      } else {
-        // The header file is a complete HTML document.
-        // Insert its body markup, excluding scripts and styles.
+      if (component === parsed.body) {
         const fragment = document.createDocumentFragment();
-
         Array.from(parsed.body.children).forEach(function (child) {
           if (child.tagName !== "SCRIPT" && child.tagName !== "STYLE") {
             fragment.appendChild(child.cloneNode(true));
           }
         });
-
         placeholder.replaceWith(fragment);
+      } else {
+        // Component styles are already copied to <head>; remove their originals from the markup.
+        component.querySelectorAll("style").forEach(function (style) { style.remove(); });
+        placeholder.replaceWith(component.cloneNode(true));
       }
 
-      // Execute component scripts after their markup exists.
+      // Execute the original component scripts after its markup exists in the document.
       scripts.forEach(function (oldScript) {
         const activeScript = document.createElement("script");
-
         if (oldScript.src) {
           activeScript.src = oldScript.src;
         } else {
           activeScript.textContent = oldScript.textContent;
         }
-
         document.body.appendChild(activeScript);
       });
-
     } catch (error) {
-      console.error(
-        "MaxproHealth: failed to load " + url,
-        error
-      );
+      console.error("MaxproHealth: could not load " + url, error);
     }
   }
 
-  async function initializeSharedComponents() {
-    // Load the header first so its controls are initialized before the footer.
-    await loadSharedComponent(
-      "header.html",
-      "mxp-header-placeholder",
-      null
-    );
-
-    await loadSharedComponent(
-      "footer.html",
-      "mxp-footer-placeholder",
-      ".mxp-footer"
-    );
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener(
-      "DOMContentLoaded",
-      initializeSharedComponents
-    );
-  } else {
-    initializeSharedComponents();
-  }
+  document.addEventListener("DOMContentLoaded", async function () {
+    await loadSharedComponent("header.html", "mxp-header-placeholder", null);
+    await loadSharedComponent("footer.html", "mxp-footer-placeholder", ".mxp-footer");
+  });
 })();
 </script>
 
