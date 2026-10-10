@@ -10,6 +10,28 @@
 <link rel="canonical" href="https://maxprohealth.pages.dev/terms">
 <meta name="theme-color" content="#ffffff">
 
+<script>
+(function () {
+  try {
+    var keys = ["theme", "color-theme", "colorScheme", "color-scheme", "darkMode", "dark-mode", "mxp-theme", "mxp-theme-mode"];
+    var saved = null;
+    for (var i = 0; i < keys.length; i++) {
+      var v = localStorage.getItem(keys[i]);
+      if (v) { saved = String(v).toLowerCase(); break; }
+    }
+    if (!saved) return;
+    var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var isDark = saved === "dark" || saved === "true" || (saved === "system" && prefersDark);
+    if (isDark) {
+      var root = document.documentElement;
+      root.classList.add("dark");
+      root.classList.add("dark-mode");
+      root.setAttribute("data-theme", "dark");
+    }
+  } catch (e) {}
+})();
+</script>
+
 <style>
 :root {
   color-scheme: light;
@@ -22,20 +44,35 @@
   --terms-link: #167451;
 }
 
+html.dark,
+html.dark-mode,
+html[data-theme="dark"],
+body.dark,
+body.dark-mode,
+body[data-theme="dark"] {
+  color-scheme: dark;
+  --terms-bg: #0e1512;
+  --terms-text: #dbe5e0;
+  --terms-heading: #e6f2ea;
+  --terms-muted: #9aa8a1;
+  --terms-border: #263029;
+  --terms-panel: #16201b;
+  --terms-link: #5ecf9c;
+}
+
 html {
-  color-scheme: light;
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
-  background: #ffffff;
 }
 
 body {
   margin: 0;
-  background: #ffffff;
+  background: var(--terms-bg);
   color: var(--terms-text);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.75;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 * {
@@ -46,7 +83,7 @@ body {
   width: min(100% - 36px, 900px);
   margin: 0 auto;
   padding: 54px 0 76px;
-  background: #ffffff;
+  background: var(--terms-bg);
 }
 
 .terms-header {
