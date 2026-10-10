@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +27,7 @@
     --border: #d9e5df;
     --link: #0f6444;
   }
+
   html.dark {
     --brand: #2bb784;
     --brand-dark: #2bb784;
@@ -38,8 +38,15 @@
     --border: #2a3a32;
     --link: #5fd4a8;
   }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     margin: 0;
     background: var(--bg);
@@ -48,8 +55,13 @@
     line-height: 1.7;
     font-size: 17px;
   }
-  a { color: var(--link); }
-  a:focus-visible, button:focus-visible {
+
+  a {
+    color: var(--link);
+  }
+
+  a:focus-visible,
+  button:focus-visible {
     outline: 3px solid var(--brand);
     outline-offset: 2px;
   }
@@ -62,6 +74,7 @@
     top: 0;
     z-index: 10;
   }
+
   .header-inner {
     max-width: 1080px;
     margin: 0 auto;
@@ -72,6 +85,7 @@
     justify-content: space-between;
     gap: 12px;
   }
+
   .brand {
     display: flex;
     align-items: center;
@@ -81,6 +95,7 @@
     color: var(--text);
     text-decoration: none;
   }
+
   .brand-mark {
     background: var(--brand);
     color: #fff;
@@ -88,6 +103,7 @@
     padding: 4px 8px;
     font-size: 0.9rem;
   }
+
   nav ul {
     list-style: none;
     margin: 0;
@@ -96,6 +112,7 @@
     flex-wrap: wrap;
     gap: 6px 20px;
   }
+
   nav a {
     color: var(--text);
     text-decoration: none;
@@ -103,20 +120,44 @@
     padding: 4px 0;
     border-bottom: 2px solid transparent;
   }
-  nav a:hover { border-bottom-color: var(--brand); }
+
+  nav a:hover {
+    border-bottom-color: var(--brand);
+  }
 
   /* Page hero */
   .page-hero {
     background: var(--bg-soft);
     border-bottom: 1px solid var(--border);
   }
-  .page-hero .wrap { padding-top: 44px; padding-bottom: 36px; }
-  .page-hero h1 { margin: 0 0 8px; font-size: 2.1rem; line-height: 1.25; }
-  .page-hero p { margin: 0; color: var(--muted); }
+
+  .page-hero .wrap {
+    padding-top: 44px;
+    padding-bottom: 36px;
+  }
+
+  .page-hero h1 {
+    margin: 0 0 8px;
+    font-size: 2.1rem;
+    line-height: 1.25;
+  }
+
+  .page-hero p {
+    margin: 0;
+    color: var(--muted);
+  }
 
   /* Layout */
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
-  main .wrap { padding-top: 32px; padding-bottom: 64px; }
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  main .wrap {
+    padding-top: 32px;
+    padding-bottom: 64px;
+  }
 
   .toc {
     background: var(--bg-soft);
@@ -125,16 +166,52 @@
     padding: 18px 22px;
     margin-bottom: 36px;
   }
-  .toc h2 { margin: 0 0 8px; font-size: 1.05rem; }
-  .toc ol { margin: 0; padding-left: 22px; columns: 2; column-gap: 32px; }
-  .toc li { margin: 2px 0; break-inside: avoid; }
 
-  section { margin-bottom: 36px; scroll-margin-top: 90px; }
-  h2 { font-size: 1.4rem; margin: 0 0 12px; line-height: 1.3; }
-  h3 { font-size: 1.1rem; margin: 22px 0 6px; }
-  p { margin: 0 0 14px; }
-  ul.list { margin: 0 0 14px; padding-left: 22px; }
-  ul.list li { margin: 4px 0; }
+  .toc h2 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+  }
+
+  .toc ol {
+    margin: 0;
+    padding-left: 22px;
+    columns: 2;
+    column-gap: 32px;
+  }
+
+  .toc li {
+    margin: 2px 0;
+    break-inside: avoid;
+  }
+
+  section {
+    margin-bottom: 36px;
+    scroll-margin-top: 90px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    margin: 0 0 12px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    margin: 22px 0 6px;
+  }
+
+  p {
+    margin: 0 0 14px;
+  }
+
+  ul.list {
+    margin: 0 0 14px;
+    padding-left: 22px;
+  }
+
+  ul.list li {
+    margin: 4px 0;
+  }
 
   .notice {
     border-left: 4px solid var(--brand);
@@ -143,15 +220,46 @@
     border-radius: 0 8px 8px 0;
     margin: 18px 0;
   }
-  .notice p:last-child { margin-bottom: 0; }
 
-  .table-scroll { overflow-x: auto; margin: 0 0 16px; }
-  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 0.95rem; }
-  th, td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
-  th { background: var(--bg-soft); }
+  .notice p:last-child {
+    margin-bottom: 0;
+  }
 
-  .todo { background: #fff3c4; color: #5a4500; padding: 0 4px; border-radius: 3px; }
-  html.dark .todo { background: #4a3d00; color: #ffe58a; }
+  .table-scroll {
+    overflow-x: auto;
+    margin: 0 0 16px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 560px;
+    font-size: 0.95rem;
+  }
+
+  th,
+  td {
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: var(--bg-soft);
+  }
+
+  .todo {
+    background: #fff3c4;
+    color: #5a4500;
+    padding: 0 4px;
+    border-radius: 3px;
+  }
+
+  html.dark .todo {
+    background: #4a3d00;
+    color: #ffe58a;
+  }
 
   /* Footer */
   .site-footer {
@@ -159,15 +267,41 @@
     background: var(--bg-soft);
     padding: 32px 20px;
   }
-  .footer-inner { max-width: 1080px; margin: 0 auto; }
-  .footer-inner p { margin: 0 0 10px; color: var(--muted); font-size: 0.95rem; }
-  .footer-links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 12px 0; }
-  .footer-links a { font-size: 0.95rem; }
+
+  .footer-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .footer-inner p {
+    margin: 0 0 10px;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin: 12px 0;
+  }
+
+  .footer-links a {
+    font-size: 0.95rem;
+  }
 
   @media (max-width: 640px) {
-    body { font-size: 16px; }
-    .page-hero h1 { font-size: 1.7rem; }
-    .toc ol { columns: 1; }
+    body {
+      font-size: 16px;
+    }
+
+    .page-hero h1 {
+      font-size: 1.7rem;
+    }
+
+    .toc ol {
+      columns: 1;
+    }
   }
 </style>
 </head>
@@ -223,6 +357,7 @@
         <li>The inquiry topic you select (for example General, Product Information, Business Partnership, or K-Beauty / Supplier Inquiry)</li>
         <li>The message you write, and any other details you choose to include</li>
       </ul>
+
       <p>
         If you contact us as a business, such as a distributor, supplier, hospital, or clinic, you may
         also give us your company name, role, country, and website.
@@ -236,6 +371,7 @@
         <li>Approximate location (country or region) derived from your IP address</li>
         <li>Your language and display preferences, such as the language selector and light/dark mode setting, which may be stored in your browser</li>
       </ul>
+
       <p>
         Our hosting provider, Cloudflare, processes basic technical data (such as IP addresses and
         request logs) to deliver the Site and protect it from abuse.
@@ -252,12 +388,14 @@
         <li>To track referrals and commissions from our affiliate partners</li>
         <li>To comply with legal obligations and enforce our terms</li>
       </ul>
+
       <p>
         Where the law requires a legal basis for processing (for example under the GDPR), we rely on
         our legitimate interests in running and improving the Site, on your consent where we ask for it
         (such as for non-essential cookies), on the need to respond to your request, and on legal
         obligations.
       </p>
+
       <p>We do not sell your personal information for money.</p>
     </section>
 
@@ -269,6 +407,7 @@
           This includes diagnoses, medical records, test results, or detailed treatment histories.
         </p>
       </div>
+
       <p>
         MaxproHealth provides general educational information. We are not a hospital, clinic, doctor,
         or medical provider, and the Site is not designed to receive or store medical records. If you
@@ -283,10 +422,15 @@
         Cookies are small files stored on your device. We and our partners may use the following
         categories:
       </p>
+
       <div class="table-scroll">
         <table>
           <thead>
-            <tr><th>Type</th><th>Purpose</th><th>Examples</th></tr>
+            <tr>
+              <th>Type</th>
+              <th>Purpose</th>
+              <th>Examples</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
@@ -317,6 +461,7 @@
           </tbody>
         </table>
       </div>
+
       <p>
         You can block or delete cookies in your browser settings. Blocking some cookies may affect how
         the Site works. Where required by law, we will ask for your consent before using non-essential
@@ -383,6 +528,7 @@
         <li>Opt out of the sale or sharing of personal information (where applicable)</li>
         <li>Lodge a complaint with your local data protection authority</li>
       </ul>
+
       <p>
         These rights come from laws such as the EU/UK GDPR, the California Consumer Privacy Act
         (CCPA/CPRA), and Korea's Personal Information Protection Act (PIPA). To exercise any of them,
@@ -434,13 +580,16 @@
         For privacy questions or requests, please use our
         <a href="contact.html">Contact Us page</a>.
       </p>
-     
     </section>
 
   </div>
 </main>
 
 <div id="mxp-footer-placeholder"></div>
+
+<!-- Scroll-to-top component placeholder -->
+<div id="mxp-scroll-top-placeholder"></div>
+
 <script>
 (function () {
   "use strict";
@@ -451,61 +600,90 @@
 
     try {
       const response = await fetch(url, { credentials: "same-origin" });
-      if (!response.ok) throw new Error("HTTP " + response.status);
+      if (!response.ok) {
+        throw new Error("HTTP " + response.status);
+      }
 
       const source = await response.text();
       const parsed = new DOMParser().parseFromString(source, "text/html");
 
-      // Bring component styles into the page head so they apply to injected markup.
+      // Copy component styles into the current page.
       parsed.querySelectorAll("style").forEach(function (style) {
         document.head.appendChild(style.cloneNode(true));
       });
 
       let component;
+
       if (componentSelector) {
         component = parsed.querySelector(componentSelector);
       } else {
         component = parsed.body;
       }
 
-      if (!component) throw new Error("Component markup was not found in " + url);
+      if (!component) {
+        throw new Error("Component markup was not found in " + url);
+      }
 
-      // Insert markup without inline script tags; scripts are activated separately below.
+      // Remove scripts before inserting the component markup.
       const scripts = Array.from(component.querySelectorAll("script"));
-      scripts.forEach(function (script) { script.remove(); });
+      scripts.forEach(function (script) {
+        script.remove();
+      });
 
       if (component === parsed.body) {
         const fragment = document.createDocumentFragment();
+
         Array.from(parsed.body.children).forEach(function (child) {
           if (child.tagName !== "SCRIPT" && child.tagName !== "STYLE") {
             fragment.appendChild(child.cloneNode(true));
           }
         });
+
         placeholder.replaceWith(fragment);
       } else {
-        // Component styles are already copied to <head>; remove their originals from the markup.
-        component.querySelectorAll("style").forEach(function (style) { style.remove(); });
+        component.querySelectorAll("style").forEach(function (style) {
+          style.remove();
+        });
+
         placeholder.replaceWith(component.cloneNode(true));
       }
 
-      // Execute the original component scripts after its markup exists in the document.
+      // Activate the component scripts after inserting its markup.
       scripts.forEach(function (oldScript) {
         const activeScript = document.createElement("script");
+
         if (oldScript.src) {
           activeScript.src = oldScript.src;
         } else {
           activeScript.textContent = oldScript.textContent;
         }
+
         document.body.appendChild(activeScript);
       });
+
     } catch (error) {
       console.error("MaxproHealth: could not load " + url, error);
     }
   }
 
   document.addEventListener("DOMContentLoaded", async function () {
-    await loadSharedComponent("header.html", "mxp-header-placeholder", null);
-    await loadSharedComponent("footer.html", "mxp-footer-placeholder", ".mxp-footer");
+    await loadSharedComponent(
+      "header.html",
+      "mxp-header-placeholder",
+      null
+    );
+
+    await loadSharedComponent(
+      "footer.html",
+      "mxp-footer-placeholder",
+      ".mxp-footer"
+    );
+
+    await loadSharedComponent(
+      "scroll-top.html",
+      "mxp-scroll-top-placeholder",
+      null
+    );
   });
 })();
 </script>
