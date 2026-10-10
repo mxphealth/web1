@@ -13,20 +13,39 @@
 <script>
 (function () {
   try {
+    var root = document.documentElement;
+    var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+
     var keys = ["theme", "color-theme", "colorScheme", "color-scheme", "darkMode", "dark-mode", "mxp-theme", "mxp-theme-mode"];
     var saved = null;
     for (var i = 0; i < keys.length; i++) {
       var v = localStorage.getItem(keys[i]);
       if (v) { saved = String(v).toLowerCase(); break; }
     }
-    if (!saved) return;
-    var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-    var isDark = saved === "dark" || saved === "true" || (saved === "system" && prefersDark);
+
+    /* FIX: when nothing is saved, follow the system preference (same as the header does),
+       so the page background is dark from the first paint instead of flashing light. */
+    var isDark = saved
+      ? (saved === "dark" || saved === "true" || (saved === "system" && prefersDark))
+      : prefersDark;
+
+    /* FIX: only the "dark" class is used, because it is the one class the header's theme
+       button adds and removes. The old extra "dark-mode" class and data-theme="dark"
+       attribute were never removed by the button, so they could keep the page stuck dark. */
     if (isDark) {
-      var root = document.documentElement;
       root.classList.add("dark");
-      root.classList.add("dark-mode");
-      root.setAttribute("data-theme", "dark");
+    }
+
+    /* FIX: keep the browser/mobile bar color in step with the theme. */
+    var syncThemeColor = function () {
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) {
+        meta.setAttribute("content", root.classList.contains("dark") ? "#0e1512" : "#ffffff");
+      }
+    };
+    syncThemeColor();
+    if (window.MutationObserver) {
+      new MutationObserver(syncThemeColor).observe(root, { attributes: true, attributeFilter: ["class"] });
     }
   } catch (e) {}
 })();
@@ -63,11 +82,14 @@ body[data-theme="dark"] {
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
+  /* FIX: paint the page background on <html> too, so it always follows the theme. */
+  background: var(--terms-bg) !important;
 }
 
 body {
   margin: 0;
-  background: var(--terms-bg);
+  /* FIX: !important so styles injected later by the shared header/footer cannot override it. */
+  background: var(--terms-bg) !important;
   color: var(--terms-text);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
