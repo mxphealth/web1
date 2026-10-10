@@ -9,12 +9,11 @@
 <meta name="description" content="Read the MaxproHealth Terms of Use to understand the conditions, responsibilities, and limitations that apply when using this website.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://maxprohealth.pages.dev/terms">
-
 <meta name="theme-color" content="#ffffff">
 
 <style>
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --terms-bg: #ffffff;
   --terms-text: #263238;
   --terms-heading: #173f35;
@@ -24,40 +23,31 @@
   --terms-link: #167451;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --terms-bg: #101715;
-    --terms-text: #e2e9e5;
-    --terms-heading: #a7ddc4;
-    --terms-muted: #aab8b1;
-    --terms-border: #2c3933;
-    --terms-panel: #18211d;
-    --terms-link: #8bd7b2;
-  }
-}
-
-* {
-  box-sizing: border-box;
-}
-
 html {
+  color-scheme: light;
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
+  background: #ffffff;
 }
 
 body {
   margin: 0;
-  background: var(--terms-bg);
+  background: #ffffff;
   color: var(--terms-text);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.75;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .terms-main {
   width: min(100% - 36px, 900px);
   margin: 0 auto;
   padding: 54px 0 76px;
+  background: #ffffff;
 }
 
 .terms-header {
@@ -153,7 +143,7 @@ body {
 
 @media (max-width: 600px) {
   .terms-main {
-    width: min(100% - 28px, 900px);
+    width: calc(100% - 28px);
     padding: 36px 0 52px;
   }
 
@@ -180,11 +170,14 @@ body {
 <main class="terms-main">
   <header class="terms-header">
     <p class="terms-eyebrow">Website Policies</p>
+
     <h1>Terms of Use</h1>
+
     <p class="terms-intro">
       These Terms of Use explain the conditions that apply when you access
       or use MaxproHealth. Please read them carefully before using this website.
     </p>
+
     <p class="terms-updated">Last updated: October 2026</p>
   </header>
 
@@ -388,8 +381,8 @@ body {
     <h2>14. Governing Law</h2>
     <p>
       These Terms of Use are subject to applicable laws. Any dispute
-      relating to the website or these terms will be handled under the
-      laws and jurisdiction that apply to the relevant circumstances,
+      relating to the website or these terms will be handled under
+      the laws and jurisdiction that apply to the relevant circumstances,
       subject to any mandatory legal protections.
     </p>
   </section>
@@ -436,7 +429,10 @@ async function loadSharedComponent(url, placeholderId, componentSelector) {
 
   try {
     const response = await fetch(url, { credentials: "same-origin" });
-    if (!response.ok) throw new Error("HTTP " + response.status);
+
+    if (!response.ok) {
+      throw new Error("HTTP " + response.status);
+    }
 
     const source = await response.text();
     const parsed = new DOMParser().parseFromString(source, "text/html");
@@ -488,9 +484,23 @@ async function loadSharedComponent(url, placeholderId, componentSelector) {
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
-  await loadSharedComponent("header.html", "mxp-header-placeholder", null);
-  await loadSharedComponent("footer.html", "mxp-footer-placeholder", ".mxp-footer");
-  await loadSharedComponent("scroll-top.html", "mxp-scroll-top-placeholder", null);
+  await loadSharedComponent(
+    "header.html",
+    "mxp-header-placeholder",
+    null
+  );
+
+  await loadSharedComponent(
+    "footer.html",
+    "mxp-footer-placeholder",
+    ".mxp-footer"
+  );
+
+  await loadSharedComponent(
+    "scroll-top.html",
+    "mxp-scroll-top-placeholder",
+    null
+  );
 });
 </script>
 
